@@ -69,4 +69,18 @@ Make sure to include the code to derive the (numeric) fact for the statement
 
 Include at least one sentence discussing the result of your fact-checking endeavor.
 
-Upload your changes to the repository. Discuss and refine answers as a team.
+Upload your changes to the repository. Discuss and refine answers as a team.\
+
+#### Deo Shaji
+
+-   My statement to verify: I counted 89 total deaths --- some unlucky Avengersare basically meat loaf with an E-Z Pass.
+
+```{r}
+total_deaths <- deaths |>
+  filter(Death == 'YES')
+View(total_deaths)
+
+nrow(total_deaths)
+```
+
+-   I filtered the deaths dataset based on the Death column having a 'YES'. Then I counted the number of rows to get 89 deaths in total, which matches with what the article originally mentioned.
