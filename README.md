@@ -1,4 +1,3 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/orjN5TIA)
 
 <!-- README.md is generated from README.Rmd. Please edit the README.Rmd file -->
 
@@ -83,7 +82,6 @@ library(tidyverse)
 
 ``` r
 library(dplyr)
-view(av)
 ```
 
 Get the data into a format where the five columns for Death\[1-5\] are
@@ -96,7 +94,6 @@ data set `deaths`.
 deaths <- av |>
   pivot_longer(cols = starts_with("Death"), names_to = "Time", values_to = "Death") |>
   mutate(Time = parse_number(Time)) 
-View(deaths)
 ```
 
 Similarly, deal with the returns of characters.
@@ -105,7 +102,6 @@ Similarly, deal with the returns of characters.
 returns <- av |>
   pivot_longer(cols = starts_with("Return"), names_to = "Time", values_to = "Return") |>
   mutate(Time = parse_number(Time))
-View(returns)
 ```
 
 Based on these datasets calculate the average number of deaths an
@@ -135,6 +131,58 @@ possible.
 
 Make sure to include the code to derive the (numeric) fact for the
 statement
+
+### Include your answer
+
+Include at least one sentence discussing the result of your
+fact-checking endeavor.
+
+Upload your changes to the repository. Discuss and refine answers as a
+team.
+
+### Nadia’s FiveThirtyEight Statement
+
+“There’s … a 50 percent chance \[Avengers\] recovered from a second or
+third death.”
+
+### Include the code
+
+Make sure to include the code to derive the (numeric) fact for the
+statement
+
+``` r
+deaths2_3 <- av %>% select(Name.Alias, Death2, Return2, Death3, Return3) %>%
+  filter(Death2 == "YES")
+# 16 Avengers died a second time
+count(deaths2_3)
+```
+
+    ##    n
+    ## 1 16
+
+``` r
+# 8 Avengers returned from their second death
+deaths2_3 %>% filter(Return2 == "YES") %>% count()
+```
+
+    ##   n
+    ## 1 8
+
+``` r
+# 2 Avengers died a third time
+deaths2_3 %>% filter(Death3 == "YES") %>% count()
+```
+
+    ##   n
+    ## 1 2
+
+``` r
+# 1 Avenger returned from their third death
+deaths2_3 %>% filter(Return3 == "YES") %>% count()
+```
+
+    ##   n
+    ## 1 1
 
 ### Include your answer
 
@@ -197,3 +245,7 @@ length(which(returns$Return == "YES"))
   number of returns by counting the number of times Return in the data
   set returned “YES”. My value for total deaths was 89, and my value for
   total returns was 57, which aligns with the analysis statement above.
+
+- My statement: “I counted 89 total deaths — some unlucky Avengers7 are
+  basically Meat Loaf with an E-ZPass — and on 57 occasions the
+  individual made a comeback.”
