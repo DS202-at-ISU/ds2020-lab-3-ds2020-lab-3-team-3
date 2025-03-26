@@ -80,33 +80,31 @@ Upload your changes to the repository. Discuss and refine answers as a team.
 
 "There’s ... a 50 percent chance [Avengers] recovered from a second or third death."
 
-### Include the code
+#### Include the code
 
 Make sure to include the code to derive the (numeric) fact for the statement
 ``` {r}
-view(deaths2_3)
 deaths2_3 <- av %>% select(Name.Alias, Death2, Return2, Death3, Return3) %>%
   filter(Death2 == "YES")
+
 # 16 Avengers died a second time
-count(deaths2_3)
-
+died2 <- count(deaths2_3)
 # 8 Avengers returned from their second death
-deaths2_3 %>% filter(Return2 == "YES") %>% count()
-
+returned2 <- deaths2_3 %>% filter(Return2 == "YES") %>% count()
 # 2 Avengers died a third time
-deaths2_3 %>% filter(Death3 == "YES") %>% count()
-
+died3 <- deaths2_3 %>% filter(Death3 == "YES") %>% count()
 # 1 Avenger returned from their third death
-deaths2_3 %>% filter(Return3 == "YES") %>% count()
+returned3 <- deaths2_3 %>% filter(Return3 == "YES") %>% count()
+
+# Avengers returned from exactly half of their second or third deaths
+(returned2+returned3) / (died2 + died3)
 ```
 
-### Include your answer
+#### Include your answer
 
-Include at least one sentence discussing the result of your fact-checking endeavor.
+Of all Avengers in the dataset, 16 died at least twice with 8 returning from their second death, and 2 died at least three times with only 1 recovering from their third death. This results in a recovery rate of 50%, which matches the number in the FiveThirtyEight analysis.
 
-Upload your changes to the repository. Discuss and refine answers as a team.\
-
-#### Deo Shaji
+### Deo Shaji
 
 -   My statement to verify: Out of the 173 listed Avengers , my analysis found that 69 had died atleast once since they had joined the avengers.
 
@@ -120,7 +118,7 @@ length(unique(total_deaths$URL))
 
 -   I filtered the deaths dataset based on the Death column having a 'YES'. Then I filtered based on the unique URLs which gave me the number of avengers who had died atleast once since they had joined the team. My value of 69 matches with what the article originally mentioned. Initially, I was going to count the number of unique name.Alias but I noticed some of the rows were empty for name.Alias., which is why I used URL
 
-#### Grace Wu
+### Grace Wu
 
 - My statement: "I counted 89 total deaths — some unlucky Avengers7 are basically Meat Loaf with an E-ZPass — and on 57 occasions the individual made a comeback."
 
