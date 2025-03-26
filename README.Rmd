@@ -51,7 +51,7 @@ View(returns)
 
 Based on these datasets calculate the average number of deaths an Avenger suffers.
 ```{r}
-avg_deaths = length(which(deaths$Death == "YES")) / length(unique(deaths$Name.Alias))
+avg_deaths = length(which(deaths$Death == "YES")) / length(unique(deaths$URL))
 print(avg_deaths)
 ```
 
@@ -88,3 +88,8 @@ length(unique(total_deaths$URL))
 ```
 
 -   I filtered the deaths dataset based on the Death column having a 'YES'. Then I filtered based on the unique URLs which gave me the number of avengers who had died atleast once since they had joined the team. My value of 69 matches with what the article originally mentioned. Initially, I was going to count the number of unique name.Alias but I noticed some of the rows were empty for name.Alias., which is why I used URL
+
+#### Grace Wu
+
+- My statement: "I counted 89 total deaths — some unlucky Avengers7 are basically Meat Loaf with an E-ZPass — and on 57 occasions the individual made a comeback."
+
