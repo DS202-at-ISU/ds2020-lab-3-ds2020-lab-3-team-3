@@ -59,13 +59,7 @@ For each team member, copy this part of the report.
 
 Each team member picks one of the statements in the FiveThirtyEight [analysis](https://fivethirtyeight.com/features/avengers-death-comics-age-of-ultron/) and fact checks it based on the data. Use dplyr functionality whenever possible.
 
-```{r}
-comebacks <- returns %>%
-  group_by(Name.Alias) %>%
-  summarise(num_measurements = n(), .groups = "drop")
 
-comebacks
-```
 
 ### FiveThirtyEight Statement
 
@@ -138,4 +132,12 @@ length(which(returns$Return == "YES"))
 
 - I counted the total number of deaths by counting the number of times Death in the deaths data set returned "YES". Then I counted the total number of returns by counting the number of times Return in the data set returned "YES". My value for total deaths was 89, and my value for total returns was 57, which aligns with the analysis statement above.
 
+####Jenna Whalen
+```{r}
+total_comebacks <- returns %>%
+  filter(Return == "YES") %>%
+  summarise(comebacks = n())
 
+total_comebacks
+```
+- I filtered the Return column to only include those that had returned from the dead (Yes). I then used the summarise function to verify there were 57 cases in which someone returned from the dead.
