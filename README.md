@@ -1,4 +1,3 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/orjN5TIA)
 
 <!-- README.md is generated from README.Rmd. Please edit the README.Rmd file -->
 
@@ -66,16 +65,54 @@ head(av)
     ## 5                                                      Dies in Fear Itself brought back because that's kind of the whole point. Second death in Time Runs Out has not yet returned
     ## 6                                                                                                                                                                             <NA>
 
+``` r
+library(tidyverse)
+```
+
+    ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+    ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
+    ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+    ## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+    ## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+    ## ✔ purrr     1.0.4     
+    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ✖ dplyr::filter() masks stats::filter()
+    ## ✖ dplyr::lag()    masks stats::lag()
+    ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+``` r
+library(dplyr)
+```
+
 Get the data into a format where the five columns for Death\[1-5\] are
 replaced by two columns: Time, and Death. Time should be a number
 between 1 and 5 (look into the function `parse_number`); Death is a
 categorical variables with values “yes”, “no” and ““. Call the resulting
 data set `deaths`.
 
+``` r
+deaths <- av |>
+  pivot_longer(cols = starts_with("Death"), names_to = "Time", values_to = "Death") |>
+  mutate(Time = parse_number(Time)) 
+```
+
 Similarly, deal with the returns of characters.
+
+``` r
+returns <- av |>
+  pivot_longer(cols = starts_with("Return"), names_to = "Time", values_to = "Return") |>
+  mutate(Time = parse_number(Time))
+```
 
 Based on these datasets calculate the average number of deaths an
 Avenger suffers.
+
+``` r
+avg_deaths = length(which(deaths$Death == "YES")) / length(unique(deaths$URL))
+print(avg_deaths)
+```
+
+    ## [1] 0.5144509
 
 ## Individually
 
@@ -102,3 +139,94 @@ fact-checking endeavor.
 
 Upload your changes to the repository. Discuss and refine answers as a
 team.
+
+### Nadia’s FiveThirtyEight Statement
+
+“There’s … a 50 percent chance \[Avengers\] recovered from a second or
+third death.”
+
+#### Include the code
+
+Make sure to include the code to derive the (numeric) fact for the
+statement
+
+``` r
+deaths2_3 <- av %>% select(Name.Alias, Death2, Return2, Death3, Return3) %>%
+  filter(Death2 == "YES")
+
+# 16 Avengers died a second time
+died2 <- count(deaths2_3)
+# 8 Avengers returned from their second death
+returned2 <- deaths2_3 %>% filter(Return2 == "YES") %>% count()
+# 2 Avengers died a third time
+died3 <- deaths2_3 %>% filter(Death3 == "YES") %>% count()
+# 1 Avenger returned from their third death
+returned3 <- deaths2_3 %>% filter(Return3 == "YES") %>% count()
+
+# Avengers returned from exactly half of their second or third deaths
+(returned2+returned3) / (died2 + died3)
+```
+
+    ##     n
+    ## 1 0.5
+
+#### Include your answer
+
+Of all Avengers in the dataset, 16 died at least twice with 8 returning
+from their second death, and 2 died at least three times with only 1
+recovering from their third death. This results in a recovery rate of
+50%, which matches the number in the FiveThirtyEight analysis.
+
+### Deo Shaji
+
+- My statement to verify: Out of the 173 listed Avengers , my analysis
+  found that 69 had died atleast once since they had joined the
+  avengers.
+
+``` r
+total_deaths <- deaths |>
+  filter(Death == 'YES') 
+
+
+length(unique(total_deaths$URL))
+```
+
+    ## [1] 69
+
+- I filtered the deaths dataset based on the Death column having a
+  ‘YES’. Then I filtered based on the unique URLs which gave me the
+  number of avengers who had died atleast once since they had joined the
+  team. My value of 69 matches with what the article originally
+  mentioned. Initially, I was going to count the number of unique
+  name.Alias but I noticed some of the rows were empty for name.Alias.,
+  which is why I used URL
+
+## Grace Wu
+
+#### FiveThirtyEight Statement
+
+- “I counted 89 total deaths — some unlucky Avengers7 are basically Meat
+  Loaf with an E-ZPass — and on 57 occasions the individual made a
+  comeback.”
+
+#### Code
+
+``` r
+length(which(deaths$Death == "YES"))
+```
+
+    ## [1] 89
+
+``` r
+length(which(returns$Return == "YES"))
+```
+
+    ## [1] 57
+
+#### Answer
+
+- I counted the total number of deaths by counting the number of times
+  Death in the deaths data set returned “YES”. Then I counted the total
+  number of returns by counting the number of times Return in the data
+  set returned “YES”. My value for total deaths was 89, and my value for
+  total returns was 57, which aligns with the analysis statement above.
