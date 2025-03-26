@@ -201,49 +201,6 @@ length(unique(total_deaths$URL))
   name.Alias but I noticed some of the rows were empty for name.Alias.,
   which is why I used URL
 
-    ##   n
-    ## 1 2
-
-``` r
-# 1 Avenger returned from their third death
-deaths2_3 %>% filter(Return3 == "YES") %>% count()
-```
-
-    ##   n
-    ## 1 1
-
-### Include your answer
-
-Include at least one sentence discussing the result of your
-fact-checking endeavor.
-
-Upload your changes to the repository. Discuss and refine answers as a
-team.  
-
-#### Deo Shaji
-
-- My statement to verify: Out of the 173 listed Avengers , my analysis
-  found that 69 had died atleast once since they had joined the
-  avengers.
-
-``` r
-total_deaths <- deaths |>
-  filter(Death == 'YES') 
-
-
-length(unique(total_deaths$URL))
-```
-
-    ## [1] 69
-
-- I filtered the deaths dataset based on the Death column having a
-  ‘YES’. Then I filtered based on the unique URLs which gave me the
-  number of avengers who had died atleast once since they had joined the
-  team. My value of 69 matches with what the article originally
-  mentioned. Initially, I was going to count the number of unique
-  name.Alias but I noticed some of the rows were empty for name.Alias.,
-  which is why I used URL
-
 ## Grace Wu
 
 #### FiveThirtyEight Statement
