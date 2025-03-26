@@ -73,4 +73,18 @@ Make sure to include the code to derive the (numeric) fact for the statement
 
 Include at least one sentence discussing the result of your fact-checking endeavor.
 
-Upload your changes to the repository. Discuss and refine answers as a team.
+Upload your changes to the repository. Discuss and refine answers as a team.\
+
+#### Deo Shaji
+
+-   My statement to verify: Out of the 173 listed Avengers , my analysis found that 69 had died atleast once since they had joined the avengers.
+
+```{r}
+total_deaths <- deaths |>
+  filter(Death == 'YES') 
+
+
+length(unique(total_deaths$URL))
+```
+
+-   I filtered the deaths dataset based on the Death column having a 'YES'. Then I filtered based on the unique URLs which gave me the number of avengers who had died atleast once since they had joined the team. My value of 69 matches with what the article originally mentioned. Initially, I was going to count the number of unique name.Alias but I noticed some of the rows were empty for name.Alias., which is why I used URL
