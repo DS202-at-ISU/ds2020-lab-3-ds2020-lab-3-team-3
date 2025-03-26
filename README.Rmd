@@ -106,7 +106,7 @@ Of all Avengers in the dataset, 16 died at least twice with 8 returning from the
 
 ### Deo Shaji
 
--   My statement to verify: Out of the 173 listed Avengers , my analysis found that 69 had died atleast once since they had joined the avengers.
+-   My statement to verify: Out of the 173 listed Avengers , my analysis found that 69 had died at least once since they had joined the avengers.
 
 ```{r}
 total_deaths <- deaths |>
@@ -140,4 +140,4 @@ total_comebacks <- returns %>%
 
 total_comebacks
 ```
-- I filtered the Return column to only include those that had returned from the dead (Yes). I then used the summarise function to verify there were 57 cases in which someone returned from the dead.
+- I filtered the Return column to only include those that had returned from the dead ('YES'). I then used the 'summarise' function to verify there were 57 cases in which someone returned from the dead.
