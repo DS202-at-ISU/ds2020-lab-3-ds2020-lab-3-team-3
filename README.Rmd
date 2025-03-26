@@ -89,7 +89,18 @@ length(unique(total_deaths$URL))
 
 -   I filtered the deaths dataset based on the Death column having a 'YES'. Then I filtered based on the unique URLs which gave me the number of avengers who had died atleast once since they had joined the team. My value of 69 matches with what the article originally mentioned. Initially, I was going to count the number of unique name.Alias but I noticed some of the rows were empty for name.Alias., which is why I used URL
 
-#### Grace Wu
+## Grace Wu
 
-- My statement: "I counted 89 total deaths — some unlucky Avengers7 are basically Meat Loaf with an E-ZPass — and on 57 occasions the individual made a comeback."
+#### FiveThirtyEight Statement
+- "I counted 89 total deaths — some unlucky Avengers7 are basically Meat Loaf with an E-ZPass — and on 57 occasions the individual made a comeback."
+
+#### Code
+```{r}
+length(which(deaths$Death == "YES"))
+length(which(returns$Return == "YES"))
+```
+#### Answer
+
+- I counted the total number of deaths by counting the number of times Death in the deaths data set returned "YES". Then I counted the total number of returns by counting the number of times Return in the data set returned "YES". My value for total deaths was 89, and my value for total returns was 57, which aligns with the analysis statement above.
+
 
