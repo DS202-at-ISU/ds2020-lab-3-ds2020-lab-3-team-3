@@ -82,7 +82,6 @@ library(tidyverse)
 
 ``` r
 library(dplyr)
-view(av)
 ```
 
 Get the data into a format where the five columns for Death\[1-5\] are
@@ -95,7 +94,6 @@ data set `deaths`.
 deaths <- av |>
   pivot_longer(cols = starts_with("Death"), names_to = "Time", values_to = "Death") |>
   mutate(Time = parse_number(Time)) 
-View(deaths)
 ```
 
 Similarly, deal with the returns of characters.
@@ -104,7 +102,6 @@ Similarly, deal with the returns of characters.
 returns <- av |>
   pivot_longer(cols = starts_with("Return"), names_to = "Time", values_to = "Return") |>
   mutate(Time = parse_number(Time))
-View(returns)
 ```
 
 Based on these datasets calculate the average number of deaths an
@@ -204,8 +201,75 @@ length(unique(total_deaths$URL))
   name.Alias but I noticed some of the rows were empty for name.Alias.,
   which is why I used URL
 
-### Grace Wu
+    ##   n
+    ## 1 2
 
-- My statement: “I counted 89 total deaths — some unlucky Avengers7 are
-  basically Meat Loaf with an E-ZPass — and on 57 occasions the
-  individual made a comeback.”
+``` r
+# 1 Avenger returned from their third death
+deaths2_3 %>% filter(Return3 == "YES") %>% count()
+```
+
+    ##   n
+    ## 1 1
+
+### Include your answer
+
+Include at least one sentence discussing the result of your
+fact-checking endeavor.
+
+Upload your changes to the repository. Discuss and refine answers as a
+team.  
+
+#### Deo Shaji
+
+- My statement to verify: Out of the 173 listed Avengers , my analysis
+  found that 69 had died atleast once since they had joined the
+  avengers.
+
+``` r
+total_deaths <- deaths |>
+  filter(Death == 'YES') 
+
+
+length(unique(total_deaths$URL))
+```
+
+    ## [1] 69
+
+- I filtered the deaths dataset based on the Death column having a
+  ‘YES’. Then I filtered based on the unique URLs which gave me the
+  number of avengers who had died atleast once since they had joined the
+  team. My value of 69 matches with what the article originally
+  mentioned. Initially, I was going to count the number of unique
+  name.Alias but I noticed some of the rows were empty for name.Alias.,
+  which is why I used URL
+
+## Grace Wu
+
+#### FiveThirtyEight Statement
+
+- “I counted 89 total deaths — some unlucky Avengers7 are basically Meat
+  Loaf with an E-ZPass — and on 57 occasions the individual made a
+  comeback.”
+
+#### Code
+
+``` r
+length(which(deaths$Death == "YES"))
+```
+
+    ## [1] 89
+
+``` r
+length(which(returns$Return == "YES"))
+```
+
+    ## [1] 57
+
+#### Answer
+
+- I counted the total number of deaths by counting the number of times
+  Death in the deaths data set returned “YES”. Then I counted the total
+  number of returns by counting the number of times Return in the data
+  set returned “YES”. My value for total deaths was 89, and my value for
+  total returns was 57, which aligns with the analysis statement above.
