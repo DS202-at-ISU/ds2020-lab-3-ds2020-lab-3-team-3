@@ -66,13 +66,47 @@ head(av)
     ## 5                                                      Dies in Fear Itself brought back because that's kind of the whole point. Second death in Time Runs Out has not yet returned
     ## 6                                                                                                                                                                             <NA>
 
+``` r
+library(tidyverse)
+```
+
+    ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+    ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
+    ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+    ## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+    ## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+    ## ✔ purrr     1.0.4     
+    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ✖ dplyr::filter() masks stats::filter()
+    ## ✖ dplyr::lag()    masks stats::lag()
+    ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+``` r
+library(dplyr)
+view(av)
+```
+
 Get the data into a format where the five columns for Death\[1-5\] are
 replaced by two columns: Time, and Death. Time should be a number
 between 1 and 5 (look into the function `parse_number`); Death is a
 categorical variables with values “yes”, “no” and ““. Call the resulting
 data set `deaths`.
 
+``` r
+deaths <- av |>
+  pivot_longer(cols = starts_with("Death"), names_to = "Time", values_to = "Death") |>
+  mutate(Time = parse_number(Time)) 
+View(deaths)
+```
+
 Similarly, deal with the returns of characters.
+
+``` r
+returns <- av |>
+  pivot_longer(cols = starts_with("Return"), names_to = "Time", values_to = "Return") |>
+  mutate(Time = parse_number(Time))
+View(returns)
+```
 
 Based on these datasets calculate the average number of deaths an
 Avenger suffers.
@@ -89,6 +123,24 @@ possible.
 ### FiveThirtyEight Statement
 
 > Quote the statement you are planning to fact-check.
+
+### Include the code
+
+Make sure to include the code to derive the (numeric) fact for the
+statement
+
+### Include your answer
+
+Include at least one sentence discussing the result of your
+fact-checking endeavor.
+
+Upload your changes to the repository. Discuss and refine answers as a
+team.
+
+### Nadia’s FiveThirtyEight Statement
+
+“There’s … a 50 percent chance \[Avengers\] recovered from a second or
+third death.” \> Quote the statement you are planning to fact-check.
 
 ### Include the code
 
