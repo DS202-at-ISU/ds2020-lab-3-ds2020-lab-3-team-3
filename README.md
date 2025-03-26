@@ -245,7 +245,3 @@ length(which(returns$Return == "YES"))
   number of returns by counting the number of times Return in the data
   set returned “YES”. My value for total deaths was 89, and my value for
   total returns was 57, which aligns with the analysis statement above.
-
-- My statement: “I counted 89 total deaths — some unlucky Avengers7 are
-  basically Meat Loaf with an E-ZPass — and on 57 occasions the
-  individual made a comeback.”
