@@ -50,6 +50,18 @@ View(returns)
 ```
 
 Based on these datasets calculate the average number of deaths an Avenger suffers.
+```{r}
+deaths <- deaths %>%
+  mutate(Death = case_when(
+    Death == "yes" ~ 1,
+    Death == "no" ~ 0,
+    Death == "" ~ 0
+  ))
+
+summarize(avg_deaths = mean(Death, na.rm = TRUE))
+
+print(average_deaths)
+```
 
 ## Individually
 
